@@ -4,7 +4,7 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
-    
+
   jpa:
     hibernate:
       ddl-auto: create
@@ -35,7 +35,7 @@ logging:
     org.springframework.security: DEBUG
 
 jwt:
-  secret: "e2e75389fd5685da14c6dc2ef6c20226401e8da66c04a1b62f439cfcd53b47a1207305e292fb48a1fc5b74f91798795617bc8ff243f996d530fa23294cf515ed"
+  secret: ${SECRET_KEY}
 
 es:
   httpHost: "localhost"
