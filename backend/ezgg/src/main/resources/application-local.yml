@@ -42,3 +42,6 @@ es:
 
 redis:
   host: "localhost"
+
+api:
+  key: ${RIOT_API_KEY}
