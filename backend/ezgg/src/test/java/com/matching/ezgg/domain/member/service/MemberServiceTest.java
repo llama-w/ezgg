@@ -52,6 +52,8 @@ class MemberServiceTest {
 	private RedisRefreshTokenRepository redisRefreshTokenRepository;
 	@Mock
 	private PasswordEncoder passwordEncoder;
+	@Mock
+	private AsyncMemberService asyncMemberService;
 
 	@InjectMocks
 	private MemberService memberService;
@@ -143,6 +145,7 @@ class MemberServiceTest {
 			() -> verify(memberRepository).save(any(Member.class)),
 			() -> verify(apiService).getMemberPuuid(validSignupRequest.getRiotUsername(),
 				validSignupRequest.getRiotTag()),
+			() -> verify(asyncMemberService).updateMatchingAttributesAsync(mockMember.getId()),
 			() -> verify(memberInfoService).createNewMemberInfo(mockMember.getId(),
 				validSignupRequest.getRiotUsername(), validSignupRequest.getRiotTag(), expectedPuuId)
 		);
