@@ -39,6 +39,7 @@ public class MemberService {
 	private final MemberInfoRepository memberInfoRepository;
 	private final JWTUtil jwtUtil;
 	private final RedisRefreshTokenRepository redisRefreshTokenRepository;
+	private final AsyncMemberService asyncMemberService;
 
 	private final PasswordEncoder passwordEncoder;
 
@@ -74,6 +75,8 @@ public class MemberService {
 		String newPuuid = apiService.getMemberPuuid(signupRequest.getRiotUsername(), signupRequest.getRiotTag());
 		MemberInfo memberInfo = memberInfoService.createNewMemberInfo(member.getId(), signupRequest.getRiotUsername(),
 			signupRequest.getRiotTag(), newPuuid);
+
+		asyncMemberService.updateMatchingAttributesAsync(member.getId());
 
 		return SignupResponse.builder()
 			.memberUsername(member.getMemberUsername())
